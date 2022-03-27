@@ -11,6 +11,8 @@ from song_auth.hashers import Hasher
 
 from songs.errors import ValidationErr
 
+from songs.settings import env
+
 
 class SongsAuthService(BaseService):
     @classmethod
@@ -27,7 +29,7 @@ class SongsAuthService(BaseService):
         try:
             raw_password = validated_data.get("password", "")
             password = Hasher.encode(
-                raw_password, "ruiedl4l!o@u#q!2(bqw6cyek@xx!+m!#=+=bjjxt=n+vko-#"
+                raw_password, env("HASHID_FIELD_SALT")
             )
             validated_data.update(password=password)
             user = User(**validated_data)
@@ -51,7 +53,7 @@ class SongsAuthService(BaseService):
                 user = User.objects.get(ftr)
                 if user:
                     hash_pass = Hasher.encode(
-                        password, "ruiedl4l!o@u#q!2(bqw6cyek@xx!+m!#=+=bjjxt=n+vko-#"
+                        password, env("HASHID_FIELD_SALT")
                     )
                     if user.password == hash_pass:
                         # make token return
@@ -62,7 +64,7 @@ class SongsAuthService(BaseService):
                         )
                         token = jwt.encode(
                             payload,
-                            "8gsuG@6@_BC`_LoOTq=x@xJEpF!IM;=C.2R>P*d+L1v+R#@0EDB3YHN?s/A$NT[dKNealcVdnJano#~`3SQO&RM;(m3T'y0~)Z3|",
+                            env("SECRET_KEY"),
                             algorithm="HS256"
                         ).decode('utf-8')
                         data.update(
