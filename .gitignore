@@ -1,0 +1,5 @@
+.idea/
+config.env
+mysqlclient-1.4.6-cp36-cp36m-win_amd64.whl
+src/db.sqlite3
+**/__pycache__/
