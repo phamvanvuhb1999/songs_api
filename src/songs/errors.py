@@ -23,6 +23,7 @@ class Strings:
     #
     REQUIRED = {"code": 1019, "message": "{0} is required."}
     INVALID_CONDITIONS = {"code": 1020, "message": "{0} is not satisfied with all conditions"}
+    REQUEST_RESET_TOKEN_EXPIRED = {"code": 1021, "message": "Request reset password has expired"}
 
 
 ValidationErr = Strings
